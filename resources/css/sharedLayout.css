@@ -1,0 +1,27 @@
+/* Explicit layout colors also work while the development utility bundle refreshes. */
+#main-header { background: #0b1110f5; color: #fff; }
+#contact { display: block; background: #0b1110; color: #fff; scroll-margin-top: 92px; }
+#main-header, #contact { font-family: "DM Sans", sans-serif; }
+#main-header .font-display, #contact .font-display { font-family: "Manrope", sans-serif; }
+#main-header .bg-wg-lime, #contact .bg-wg-lime { background-color: #c8f135; color: #0b1110; }
+#main-header .text-wg-lime, #contact .text-wg-lime { color: #c8f135; }
+.desktop-navigation { display: none; }
+.nav-link { color: #c8cdca; font-size: 14px; font-weight: 600; }
+.nav-link:hover, .mobile-nav-link:hover { color: #c8f135; }
+.header-icon-button, .social-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #ffffff30; border-radius: 50%; color: #e0e5df; }
+.header-icon-button:hover, .social-button:hover { color: #c8f135; border-color: #c8f135; }
+.mobile-menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex-shrink: 0; min-height: 44px; padding: 10px 14px; border: 1px solid #ffffff40; border-radius: 24px; color: #fff; background: transparent; font-size: 13px; font-weight: 600; cursor: pointer; }
+.mobile-menu-toggle:hover { border-color: #c8f135; color: #c8f135; }
+.mobile-menu-toggle svg { width: 20px; height: 20px; flex-shrink: 0; }
+#mobile-menu { background: #0b1110; max-height: calc(100vh - 76px); max-height: calc(100dvh - 76px); overflow-y: auto; overscroll-behavior: contain; }
+#mobile-menu[hidden] { display: none; }
+.mobile-nav-link { display: block; padding: 14px 4px; border-bottom: 1px solid #ffffff20; color: #e0e5df; font-size: 15px; line-height: 1.6; }
+.footer-heading { margin: 0 0 20px; color: #fff; font-family: "Manrope", sans-serif; font-size: 14px; font-weight: 700; }
+.footer-link { display: inline-block; padding-block: 4px; color: #b7c0b9; font-size: 14px; line-height: 1.6; }
+.footer-link:hover { color: #c8f135; }
+#contact > div > .grid > div { min-width: 0; }
+#main-header :is(a, button):focus-visible, #contact :is(a, button, input):focus-visible { outline: 2px solid #c8f135; outline-offset: 4px; }
+@media (min-width: 1280px) {
+    .desktop-navigation { display: flex; }
+    .mobile-menu-toggle, #mobile-menu { display: none; }
+}
