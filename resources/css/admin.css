@@ -1,0 +1,82 @@
+:root { font-family: "DM Sans", sans-serif; color: #24352c; background: #f6f7f3; font-synthesis: none; color-scheme: light; }
+*, *::before, *::after { box-sizing: border-box; }
+body.wg-admin { margin: 0; min-width: 0; }
+.wg-admin a { color: inherit; text-decoration: none; }
+.wg-admin button { font: inherit; color: inherit; cursor: pointer; }
+.wg-admin button:disabled { cursor: default; }
+.wg-admin [hidden] { display: none !important; }
+.wg-admin :is(a, button, input, select, textarea, [tabindex]):focus-visible { outline: 3px solid #789345; outline-offset: 4px; }
+.wg-admin svg { display: block; flex-shrink: 0; }
+.wg-admin-skip { position: fixed; top: 12px; left: 12px; z-index: 100; padding: 12px 18px; background: #fff; border-radius: 8px; transform: translateY(-180%); }
+.wg-admin-skip:focus { transform: translateY(0); }
+.wg-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 60; display: flex; flex-direction: column; width: min(280px, calc(100vw - 32px)); height: 100vh; height: 100dvh; padding: 28px 18px 18px; background: #13251d; color: #e7eee6; overflow-y: auto; overscroll-behavior: contain; transform: translateX(-100%); visibility: hidden; transition: transform .2s ease, visibility .2s; }
+.wg-sidebar__brand-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 8px; }
+.wg-admin-brand { display: inline-flex; align-items: center; gap: 11px; font-family: "Manrope", sans-serif; font-size: 21px; font-weight: 800; letter-spacing: -.055em; }
+.wg-admin-brand__mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #d0ec83; color: #223720; }
+.wg-admin-brand__accent { color: #d0ec83; }
+.wg-admin-brand small { display: block; margin-top: 5px; font-family: "DM Sans", sans-serif; font-size: 8px; font-weight: 500; letter-spacing: .2em; color: #a0b29e; }
+.wg-admin-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 36px; min-height: 44px; padding: 0; border: 0; background: transparent; }
+.wg-sidebar__store { display: flex; align-items: center; gap: 11px; margin: 32px 4px 28px; padding: 14px 12px; border: 1px solid #ffffff14; border-radius: 12px; background: #ffffff04; }
+.wg-sidebar__store-icon { display: grid; place-items: center; width: 32px; height: 32px; flex-shrink: 0; background: #dce5d415; border: 1px solid #dce5d420; border-radius: 8px; font-size: 13px; font-weight: 600; }
+.wg-sidebar__store strong { display: block; font-size: 12px; font-weight: 500; }
+.wg-sidebar__store div > span { display: block; margin-top: 5px; color: #a0b29e; font-size: 10px; }
+.wg-sidebar__label { margin: 0 14px 10px; font-size: 9px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: #9fb09d; }
+.wg-sidebar__label--second { margin-top: 30px; }
+.wg-sidebar__link { display: flex; align-items: center; gap: 13px; width: 100%; min-height: 46px; margin: 4px 0; padding: 12px 14px; border: 0; border-radius: 10px; background: transparent; text-align: left; font-size: 13px; line-height: 1.6; }
+.wg-sidebar__link[aria-current="page"] { background: #d0ec83; color: #1d3421; font-weight: 600; }
+.wg-sidebar__link:disabled { color: #b3c0ae; }
+.wg-sidebar__link small { margin-left: auto; color: #9aac96; font-size: 9px; }
+.wg-sidebar__active-dot { display: none; width: 5px; height: 5px; margin-left: auto; border-radius: 50%; background: currentColor; }
+.wg-sidebar__link[aria-current] .wg-sidebar__active-dot { display: block; }
+.wg-sidebar__bottom { margin-top: auto; padding: 32px 8px 0; }
+.wg-sidebar__storefront { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 44px; padding: 10px 3px; font-size: 12px; }
+.wg-sidebar__identity { display: flex; align-items: center; gap: 11px; border-top: 1px solid #ffffff18; padding-top: 19px; margin-top: 17px; }
+.wg-sidebar__identity > span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #334333; color: #e3ecd5; font-size: 11px; font-weight: 600; }
+.wg-sidebar__identity strong { display: block; font-size: 11px; font-weight: 500; }
+.wg-sidebar__identity small { display: block; font-size: 10px; color: #a0b29e; margin-top: 5px; }
+.wg-sidebar-backdrop { position: fixed; inset: 0; z-index: 50; border: 0; background: #10201888; }
+.wg-admin[data-navigation-open] .wg-sidebar { visibility: visible; transform: translateX(0); }
+.wg-admin-workspace { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; min-width: 0; }
+.wg-admin-topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 76px; padding: 14px 20px; border-bottom: 1px solid #e3e8de; background: #ffffffed; }
+.wg-admin-topbar__left, .wg-admin-topbar__right { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.wg-admin-menu-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 12px; border: 1px solid #dce3d5; border-radius: 9px; background: #fff; font-size: 12px; }
+.wg-admin-breadcrumb { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 12px; line-height: 1.7; }
+.wg-admin-breadcrumb__root, .wg-admin-breadcrumb > [aria-hidden] { color: #7b897b; }
+.wg-admin-preview { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; font-size: 10px; color: #697864; }
+.wg-admin-preview > span { width: 6px; height: 6px; border-radius: 50%; background: #9aaf7d; }
+.wg-admin-main { flex: 1; width: 100%; max-width: 1512px; margin-inline: auto; padding: 32px 20px 40px; min-width: 0; }
+.wg-admin-page-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.wg-admin-page-heading > div { min-width: 0; }
+.wg-admin-eyebrow { margin: 0 0 12px; color: #748268; font-size: 10px; line-height: 1.7; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.wg-admin h1, .wg-admin h2, .wg-admin h3 { font-family: "Manrope", sans-serif; }
+.wg-admin h1 { margin: 0; font-size: clamp(26px, 2.7vw, 36px); font-weight: 700; line-height: 1.25; letter-spacing: -.045em; overflow-wrap: anywhere; }
+.wg-admin-page-description { margin: 12px 0 0; color: #72806e; font-size: 14px; line-height: 1.8; }
+.wg-admin-page-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.wg-admin-button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; min-height: 44px; padding: 12px 18px; border: 1px solid #dce3d5; border-radius: 10px; background: #fff; font-size: 12px; font-weight: 600; line-height: 1.6; }
+.wg-admin-button--primary { background: #20382a; color: #fff !important; border-color: #20382a; }
+.wg-admin-button--primary:hover { background: #35523c; }
+.wg-admin-welcome { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; overflow: hidden; border: 1px solid #dce4d1; border-radius: 18px; background: #edf1e4; }
+.wg-admin-welcome__copy { padding: 32px 26px; }
+.wg-admin-welcome h2 { margin: 0; font-size: clamp(32px, 3.4vw, 46px); line-height: 1.16; font-weight: 600; letter-spacing: -.05em; }
+.wg-admin-welcome__copy > p:not(.wg-admin-eyebrow) { max-width: 46ch; margin: 20px 0; color: #6b7962; font-size: 13px; line-height: 1.9; }
+.wg-admin-welcome__copy > a { display: inline-flex; align-items: center; gap: 20px; min-height: 44px; font-size: 12px; font-weight: 600; }
+.wg-admin-welcome__art { position: relative; display: none; align-items: center; justify-content: center; min-width: 0; background: #e4ead9; overflow: hidden; }
+.wg-admin-wall { width: 126px; display: flex; flex-direction: column; gap: 22px; padding: 14px 0; border-inline: 7px solid #738260; transform: rotate(-12deg); opacity: .65; }
+.wg-admin-wall i { height: 5px; background: #738260; }
+.wg-admin-welcome__art > span { position: absolute; bottom: 26px; left: 0; right: 0; text-align: center; font-size: 8px; letter-spacing: .3em; color: #68795b; }
+.wg-admin-foundation { margin-top: 34px; }
+.wg-admin-section-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+.wg-admin-section-heading h2 { margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -.02em; }
+.wg-admin-section-heading p { margin: 0; font-size: 11px; color: #7b8975; }
+.wg-admin-module-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.wg-admin-card { display: flex; flex-direction: column; align-items: flex-start; padding: 24px; background: #fff; border: 1px solid #e1e7d9; border-radius: 14px; min-width: 0; }
+.wg-admin-card__number { color: #8b9b7b; font-size: 11px; margin-bottom: 28px; }
+.wg-admin-card h3 { margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -.03em; }
+.wg-admin-card > p { margin: 12px 0 22px; color: #72806e; font-size: 12px; line-height: 1.9; }
+.wg-admin-module-status { margin-top: auto; padding-top: 16px; width: 100%; border-top: 1px solid #edf0e7; color: #7b8975; font-size: 10px; line-height: 1.7; }
+.wg-admin-preview-note { margin: 24px 0 0; color: #7b8975; font-size: 11px; line-height: 1.8; }
+.wg-admin-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 20px; border-top: 1px solid #e3e8de; color: #7b8975; font-size: 10px; line-height: 1.8; }
+@media (max-width: 479px) { .wg-admin-breadcrumb__root, .wg-admin-breadcrumb > [aria-hidden] { display: none; } .wg-admin-preview { font-size: 9px; } .wg-admin-topbar { gap: 8px; } .wg-admin-topbar__left { gap: 10px; } .wg-admin-menu-button { padding-inline: 10px; } }
+@media (min-width: 768px) { .wg-admin-main { padding: 38px 32px 44px; } .wg-admin-topbar, .wg-admin-footer { padding-inline: 32px; } .wg-admin-welcome { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); } .wg-admin-welcome__art { display: flex; } .wg-admin-welcome__copy { padding: 36px; } .wg-admin-module-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (min-width: 1200px) { .wg-sidebar { width: 256px; visibility: visible; transform: none; } .wg-sidebar__close, .wg-admin-menu-button { display: none; } .wg-admin-workspace { margin-left: 256px; } .wg-admin-main { padding: 44px 40px 48px; } .wg-admin-topbar, .wg-admin-footer { padding-inline: 40px; } }
+@media (prefers-reduced-motion: reduce) { .wg-sidebar { transition: none; } }
