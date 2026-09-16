@@ -150,7 +150,7 @@
 
                     {{-- Cart --}}
                     <a
-                        href="#"
+                        href="{{ url('/cart') }}"
                         class="relative flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white/80 transition hover:border-wg-lime/40 hover:bg-white/5 hover:text-wg-lime"
                         aria-label="Shopping cart"
                     >
@@ -252,6 +252,10 @@
 
                 <a href="{{ url('/shop') }}" class="mobile-nav-link">
                     Shop
+                </a>
+
+                <a href="{{ url('/cart') }}" class="mobile-nav-link">
+                    Cart
                 </a>
 
                 <a href="{{ url('/') }}#why-wallgym" class="mobile-nav-link">

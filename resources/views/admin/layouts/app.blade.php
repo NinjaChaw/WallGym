@@ -59,14 +59,14 @@
             @endforeach
 
             <p class="wg-sidebar__label wg-sidebar__label--second">Store management</p>
-            <button class="wg-sidebar__link" type="button" disabled>
+            <a class="wg-sidebar__link" href="{{ url('/admin/content/homepage') }}" @if (trim($__env->yieldContent('active_nav')) === 'content') aria-current="page" @endif>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg>
-                <span>Website content</span><small>Soon</small>
-            </button>
-            <button class="wg-sidebar__link" type="button" disabled>
+                <span>Website content</span><span class="wg-sidebar__active-dot" aria-hidden="true"></span>
+            </a>
+            <a class="wg-sidebar__link" href="{{ url('/admin/settings') }}" @if (trim($__env->yieldContent('active_nav')) === 'settings') aria-current="page" @endif>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 17h16M9 4v6m6 4v6" stroke-linecap="round"/></svg>
-                <span>Settings</span><small>Soon</small>
-            </button>
+                <span>Settings</span><span class="wg-sidebar__active-dot" aria-hidden="true"></span>
+            </a>
             @stack('navigation')
         </nav>
 

@@ -12,6 +12,9 @@ Route::get('/shop', function () {
 
 // Front-end product previews; no catalog or checkout backend yet.
 Route::view('/product', 'product');
+Route::view('/cart', 'cart.index');
+Route::view('/checkout', 'checkout.index');
+Route::view('/checkout/success', 'checkout.success');
 Route::view('/shop/{product}', 'product')
     ->whereIn('product', ['swedish-wall', 'gymnastic-rings', 'exercise-mat']);
 
@@ -28,3 +31,6 @@ Route::view('/admin/products/{product}/edit', 'admin.products.edit')->whereNumbe
 Route::view('/admin/products/{product}', 'admin.products.show')->whereNumber('product');
 Route::view('/admin/orders', 'admin.orders.index');
 Route::view('/admin/orders/{order}', 'admin.orders.show')->whereNumber('order');
+Route::view('/admin/settings', 'admin.settings.index');
+Route::view('/admin/content/homepage', 'admin.content.homepage');
+Route::view('/admin/content/faq', 'admin.content.faq');

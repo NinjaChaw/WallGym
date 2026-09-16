@@ -7,7 +7,7 @@ export default defineConfig({
         laravel({
             // Product management is a standalone frontend preview.
             // Dedicated entries keep admin page styles independently loadable in development.
-            input: ['resources/css/app.css', 'resources/css/admin.css', 'resources/js/admin.js', 'resources/css/admin/categories.css', 'resources/js/admin/categories.js', 'resources/css/admin/products.css', 'resources/js/admin/products.js', 'resources/css/admin/orders.css', 'resources/js/admin/orders.js', 'resources/css/sharedLayout.css', 'resources/css/pages/madeForHome.css', 'resources/css/pages/homeFaq.css', 'resources/css/pages/shop.css', 'resources/css/pages/product.css', 'resources/js/app.js', 'resources/js/pages/shop.js', 'resources/js/pages/product.js'],
+            input: ['resources/css/app.css', 'resources/css/admin.css', 'resources/js/admin.js', 'resources/css/admin/categories.css', 'resources/js/admin/categories.js', 'resources/css/admin/products.css', 'resources/js/admin/products.js', 'resources/css/admin/orders.css', 'resources/js/admin/orders.js', 'resources/css/admin/settings.css', 'resources/js/admin/settings.js', 'resources/css/admin/content.css', 'resources/js/admin/content.js', 'resources/css/sharedLayout.css', 'resources/css/pages/madeForHome.css', 'resources/css/pages/homeFaq.css', 'resources/css/pages/shop.css', 'resources/css/pages/product.css', 'resources/css/pages/purchase.css', 'resources/js/pages/purchase.js', 'resources/js/app.js', 'resources/js/pages/shop.js', 'resources/js/pages/product.js'],
             refresh: true,
         }),
         tailwindcss(),
