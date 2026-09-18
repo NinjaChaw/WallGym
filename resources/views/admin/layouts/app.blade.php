@@ -38,7 +38,7 @@
             </a>
 
             {{-- Enable each module with its real URL when its frontend is ready. --}}
-            <a class="wg-sidebar__link" href="{{ url('/admin/categories') }}" @if (trim($__env->yieldContent('active_nav')) === 'categories') aria-current="page" @endif>
+            <a class="wg-sidebar__link" href="{{ route('admin.categories.index') }}" @if (trim($__env->yieldContent('active_nav')) === 'categories') aria-current="page" @endif>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h7l2 2h9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm0 0V5a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v2" stroke-linejoin="round"/></svg>
                 <span>Categories</span><span class="wg-sidebar__active-dot" aria-hidden="true"></span>
             </a>

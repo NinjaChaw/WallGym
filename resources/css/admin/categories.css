@@ -79,6 +79,7 @@
 .category-error { color: #a14e32 !important; }
 .category-notice { padding: 20px; font-size: 13px; color: #72806e; }
 .category-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.category-pagination { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
 @media (min-width: 640px) { .category-stats { grid-template-columns: repeat(3,minmax(0,1fr)); } }
 @media (min-width: 900px) { .category-form { grid-template-columns: minmax(0,1.6fr) minmax(0,1fr); } }
 @media (min-width: 768px) {

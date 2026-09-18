@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CategoryController;
 
 Route::get('/', function () {
     return view('home');
@@ -22,9 +23,12 @@ Route::view('/shop/{product}', 'product')
 
 // Layout preview only; no authentication or live admin operations yet.
 Route::view('/admin', 'admin.dashboard');
-Route::view('/admin/categories', 'admin.categories.index');
-Route::view('/admin/categories/create', 'admin.categories.create');
-Route::view('/admin/categories/{category}/edit', 'admin.categories.edit')->whereNumber('category');
+
+//Category route
+Route::resource('admin/categories', CategoryController::class)
+    ->except(['show'])
+    ->names('admin.categories');
+
 Route::view('/admin/products', 'admin.products.index');
 Route::view('/admin/products/create', 'admin.products.create');
 Route::view('/admin/products/{product}/edit', 'admin.products.edit')->whereNumber('product');
