@@ -1,4 +1,10 @@
 .product-page, .product-page * { box-sizing: border-box; }
+.product-add:not(:disabled) { cursor: pointer; background: #c8f135; color: #17231c; }
+.product-cart-feedback { padding: 12px 16px; margin-bottom: 16px; border: 1px solid #ebd1c5; border-radius: 10px; background: #fff1eb; color: #934a31; font-size: 13px; }
+.product-image-placeholder { display: grid; place-items: center; height: 100%; color: #52604e; font-size: 14px; }
+.product-related__placeholder { display: grid; place-items: center; width: 84px; height: 100px; flex-shrink: 0; border-radius: 10px; background: #e8dfd1; color: #52604e; font-size: 11px; }
+.product-info, .product-related__card, .product-breadcrumb { overflow-wrap: anywhere; }
+.product-description { white-space: pre-line; }
 .product-page { padding: 24px 20px 64px; background: #f7f6f1; color: #17231c; font-family: "DM Sans", sans-serif; }
 .product-page [hidden] { display: none !important; }
 .product-page__inner { max-width: 1216px; margin: 0 auto; }

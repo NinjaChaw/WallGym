@@ -1,4 +1,11 @@
 .purchase, .purchase * { box-sizing: border-box; }
+.checkout-image-placeholder { display: grid; place-items: center; width: 46px; height: 56px; flex-shrink: 0; border-radius: 7px; background: #e8dfd1; font-size: 9px; color: #66706c; }
+.cart-image-placeholder { display: grid; place-items: center; width: 84px; height: 110px; border-radius: 12px; background: #e8dfd1; color: #66706c; font-size: 11px; }
+.cart-quantity-form, .cart-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.cart-footer { justify-content: space-between; }
+.cart-quantity-form input { width: 70px; min-height: 44px; padding: 8px; border: 1px solid #d7ddce; border-radius: 12px; background: #fff; text-align: center; }
+.cart-quantity-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.purchase-item-info, .purchase-cart-item > strong { min-width: 0; overflow-wrap: anywhere; }
 .purchase { padding: 32px 20px 80px; background: #f7f6f1; color: #17231c; font-family: 'DM Sans', sans-serif; }
 .purchase [hidden] { display: none !important; }
 .purchase-inner { max-width: 1160px; margin: auto; }

@@ -1,4 +1,9 @@
 .ao-list { list-style: none; margin: 0; padding: 0; }
+.ao-row__identity a, .ao-address, .ao-order-meta, .ao-item > strong { overflow-wrap: anywhere; }
+.ao-item__mark { display: grid; place-items: center; width: 56px; height: 64px; border-radius: 9px; background: #edf1e4; color: #738566; }
+.ao-management-form { margin-top: 24px; }
+.ao-confirm { display: flex; align-items: flex-start; gap: 10px; margin: 16px 0; font-size: 12px; line-height: 1.8; }
+.ao-confirm input { margin-top: 4px; flex-shrink: 0; width: 18px; height: 18px; }
 .ao-list-head { display: none; }
 .ao-row { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: center; gap: 18px 16px; padding: 22px; border-top: 1px solid #edf0e7; }
 .ao-row__identity { grid-column: 1 / -1; min-width: 0; }

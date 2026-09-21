@@ -1,13 +1,13 @@
 @extends('layouts.app')
-@section('title', 'Order preview complete | WallGym')
+@section('title', 'Order received | WallGym')
+@push('styles') @vite('resources/css/pages/purchase.css') @endpush
 @section('content')
-<div class="purchase" data-purchase="success" data-base="{{ url('/') }}"><div class="purchase-inner">
-    @include('checkout._shared', ['step' => 3])
-    <div class="purchase-success" data-receipt hidden>
-        <header class="purchase-intro"><span class="purchase-success__mark" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m5 12 4 4L19 6"/></svg></span><p class="purchase-eyebrow">All set for the preview</p><h1>A little more <em>movement.</em></h1><p>Your order preview is complete. No real order has been placed.</p></header>
-        <section class="purchase-card" aria-labelledby="receipt-title"><div class="purchase-section-heading"><h2 id="receipt-title">Order summary</h2><span data-reference></span></div><ul class="purchase-mini-items" data-mini-items></ul><dl class="purchase-totals"><div><dt>Subtotal</dt><dd data-subtotal></dd></div><div><dt>Delivery</dt><dd data-delivery></dd></div><div class="purchase-total"><dt>Total</dt><dd data-total></dd></div></dl><div class="purchase-receipt-grid"><div><h3>Deliver to</h3><p data-address></p><p data-contact></p></div><div><h3>Payment method</h3><p>Cash on Delivery</p><h3>What happens next?</h3><p>This is a design preview. No confirmation message or shipment will be sent.</p></div></div></section>
-        <a class="purchase-button" href="{{ url('/shop') }}">Continue exploring <span aria-hidden="true">&rarr;</span></a>
-    </div>
-    <section class="purchase-empty purchase-card" data-empty hidden><h1>No order preview yet.</h1><p>Complete the checkout preview to see your order summary here.</p><a class="purchase-button" href="{{ url('/cart') }}">Go to cart</a></section>
-</div></div>
+<div class="purchase"><div class="purchase-inner"><div class="purchase-success">
+    <header class="purchase-intro"><span class="purchase-success__mark" aria-hidden="true">✓</span><p class="purchase-eyebrow">Order received</p><h1>A little more <em>movement.</em></h1><p>Thank you, {{ $order->customer_name }}. Your order has been placed.</p></header>
+    <section class="purchase-card" aria-labelledby="receipt-title"><div class="purchase-section-heading"><h2 id="receipt-title">Order summary</h2><span>{{ $order->order_number }}</span></div>
+        <ul class="purchase-mini-items">@foreach($order->items as $item)<li><div>{{ $item->product_name }}<small>Quantity {{ $item->quantity }} · {{ $order->currency }} {{ number_format($item->unit_price, 2) }} each</small></div><strong>{{ $order->currency }} {{ number_format($item->line_total, 2) }}</strong></li>@endforeach</ul>
+        <dl class="purchase-totals"><div><dt>Subtotal</dt><dd>{{ $order->currency }} {{ number_format($order->subtotal, 2) }}</dd></div><div><dt>Delivery</dt><dd>{{ $order->currency }} {{ number_format($order->delivery_charge, 2) }}</dd></div>@if($order->discount_amount > 0)<div><dt>Discount</dt><dd>{{ $order->currency }} {{ number_format($order->discount_amount, 2) }}</dd></div>@endif<div class="purchase-total"><dt>Total</dt><dd>{{ $order->currency }} {{ number_format($order->total, 2) }}</dd></div></dl>
+        <div class="purchase-receipt-grid"><div><h3>Deliver to</h3><p>{{ $order->customer_name }}<br>{{ $order->address }}<br>{{ $order->area }}, {{ $order->city }}<br>Bangladesh</p><p>{{ $order->customer_phone }}@if($order->customer_email)<br>{{ $order->customer_email }}@endif</p>@if($order->notes)<h3>Delivery instructions</h3><p>{{ $order->notes }}</p>@endif</div><div><h3>Payment method</h3><p>Cash on Delivery · {{ ucfirst($order->payment_status) }}</p><h3>Order status</h3><p>{{ ucfirst($order->status) }}</p><h3>What happens next?</h3><p>Your order is awaiting confirmation. Keep your order number for reference.</p></div></div>
+    </section><a class="purchase-button" href="{{ route('shop.index') }}">Continue shopping <span aria-hidden="true">&rarr;</span></a>
+</div></div></div>
 @endsection

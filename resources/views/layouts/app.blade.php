@@ -167,9 +167,10 @@
 
                         <span
                             id="cart-count"
-                            class="absolute -right-1 -top-1 hidden h-5 min-w-5 items-center justify-center rounded-full bg-wg-lime px-1 text-[10px] font-bold text-wg-dark"
+                            data-session-cart
+                            class="absolute -right-1 -top-1 {{ array_sum(session('cart.items', [])) > 0 ? 'flex' : 'hidden' }} h-5 min-w-5 items-center justify-center rounded-full bg-wg-lime px-1 text-[10px] font-bold text-wg-dark"
                         >
-                            0
+                            {{ array_sum(session('cart.items', [])) }}
                         </span>
                     </a>
 

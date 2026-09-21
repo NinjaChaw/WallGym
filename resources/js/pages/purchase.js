@@ -1,3 +1,44 @@
+// Live checkout uses server-calculated quotes; legacy preview code below is not mounted here.
+const checkout = typeof document !== 'undefined' ? document.querySelector('[data-checkout-real]') : null;
+if (checkout) {
+    const zone = checkout.querySelector('[name="zone"]');
+    const delivery = checkout.querySelector('[data-checkout-delivery]');
+    const total = checkout.querySelector('[data-checkout-total]');
+    const feedback = checkout.querySelector('[data-quote-error]');
+    const money = amount => `BDT ${(amount / 100).toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    let pending;
+    zone.addEventListener('change', async () => {
+        pending?.abort();
+        feedback.hidden = true;
+        if (!zone.value) {
+            delivery.textContent = 'Select your area';
+            total.textContent = 'Choose delivery zone';
+            return;
+        }
+        const request = new AbortController();
+        pending = request;
+        delivery.textContent = 'Updating…';
+        total.textContent = 'Updating…';
+        try {
+            const url = new URL(checkout.dataset.quoteUrl, window.location.href);
+            url.searchParams.set('zone', zone.value);
+            const response = await fetch(url, { headers: { Accept: 'application/json' }, credentials: 'same-origin', signal: request.signal });
+            const data = await response.json();
+            if (request.signal.aborted) return;
+            if (!response.ok) throw new Error(data.message || 'Unable to update delivery.');
+            checkout.querySelector('[data-checkout-subtotal]').textContent = money(data.subtotal);
+            delivery.textContent = money(data.delivery);
+            total.textContent = money(data.total);
+        } catch (error) {
+            if (request.signal.aborted) return;
+            delivery.textContent = 'Select delivery zone again';
+            total.textContent = 'Unable to calculate';
+            feedback.textContent = `${error.message} Please refresh checkout and check the total before placing your order.`;
+            feedback.hidden = false;
+        }
+    });
+}
+
 export const catalog = {
     'swedish-wall': {name: 'Swedish Wall', price: 1850000, image: 'images/hero/wallgym-interior-640.jpg'},
     'gymnastic-rings': {name: 'Gymnastic Rings', price: 240000, image: 'images/collection/gymnastic-rings-480.jpg'},
@@ -42,6 +83,7 @@ if (root) {
     };
     const updateCount = () => {
         const count = document.getElementById('cart-count');
+        if (count?.hasAttribute('data-session-cart')) return;
         if (count) { const number = state.items.reduce((sum,item)=>sum+item.quantity,0); count.textContent=number; count.classList.toggle('hidden',number===0); count.classList.toggle('flex',number>0); }
     };
     const renderTotals = (items, zone) => {

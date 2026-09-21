@@ -14,11 +14,13 @@ if (page) {
         decrease.disabled = count === 1;
         increase.disabled = count === 99;
     };
+    if (quantity && decrease && increase) {
     decrease.addEventListener('click', () => setQuantity(normalizeQuantity(quantity.value) - 1));
     increase.addEventListener('click', () => setQuantity(normalizeQuantity(quantity.value) + 1));
     quantity.addEventListener('change', () => setQuantity(quantity.value));
     page.querySelector('[data-quantity-control]').hidden = false;
     setQuantity(quantity.value);
+    }
 
     const main = page.querySelector('[data-main-image]');
     const thumbnails = [...page.querySelectorAll('[data-gallery-image]')];
@@ -33,7 +35,7 @@ if (page) {
 
     const dialog = page.querySelector('[data-lightbox]');
     const zoom = page.querySelector('[data-open-zoom]');
-    if (typeof dialog.showModal === 'function') {
+    if (main && zoom && dialog && typeof dialog.showModal === 'function') {
         zoom.hidden = false;
         zoom.addEventListener('click', () => {
             const image = dialog.querySelector('[data-zoom-image]');

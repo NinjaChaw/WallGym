@@ -1,28 +1,35 @@
 @extends('layouts.app')
 @section('title', 'Checkout | WallGym')
+@push('styles') @vite('resources/css/pages/purchase.css') @endpush
+@push('scripts') @vite('resources/js/pages/purchase.js') @endpush
 @section('content')
-<div class="purchase" data-purchase="checkout" data-base="{{ url('/') }}"><div class="purchase-inner">
-    @include('checkout._shared', ['step' => 2])
+<div class="purchase" data-checkout-real data-quote-url="{{ route('checkout.quote') }}"><div class="purchase-inner">
+    <nav class="purchase-steps" aria-label="Shopping progress"><a href="{{ route('cart.index') }}"><span>01</span> Cart</a><i aria-hidden="true"></i><span aria-current="step"><span>02</span> Checkout</span><i aria-hidden="true"></i><span><span>03</span> Complete</span></nav>
+    @if(session('success'))<p class="purchase-feedback" role="status">{{ session('success') }}</p>@endif
+    @foreach($notices as $notice)<p class="purchase-feedback" role="status">{{ $notice }}</p>@endforeach
+    @if($errors->any())<div class="purchase-feedback" data-error role="alert"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
+    <p class="purchase-feedback" data-quote-error role="status" hidden></p>
     <header class="purchase-intro"><p class="purchase-eyebrow">One step closer</p><h1>Movement, <em>on its way.</em></h1><p>Just the essentials. No account needed.</p></header>
-    <div class="purchase-layout" data-filled hidden>
-        <form id="checkout-form" class="purchase-form" novalidate>
+    <div class="purchase-layout">
+        <form id="checkout-form" class="purchase-form" method="POST" action="{{ route('checkout.store') }}">
+            @csrf
+            <input type="hidden" name="checkout_token" value="{{ session('checkout.token') }}">
             <section class="purchase-card" aria-labelledby="contact-title"><div class="purchase-section-heading"><h2 id="contact-title">Contact details</h2><span>01</span></div><div class="purchase-fields">
-                <label class="purchase-field">Full name<input name="name" autocomplete="name" required maxlength="100" aria-describedby="error-name"><small id="error-name" data-error="name"></small></label>
-                <label class="purchase-field">Phone number<input name="phone" type="tel" autocomplete="tel" required maxlength="30" placeholder="+880 1XXXXXXXXX" aria-describedby="error-phone"><small id="error-phone" data-error="phone"></small></label>
-                <label class="purchase-field purchase-field--wide">Email <span>Optional</span><input name="email" type="email" autocomplete="email" maxlength="150" placeholder="you@example.com" aria-describedby="error-email"><small id="error-email" data-error="email"></small></label>
+                @foreach(['name'=>['Full name','text','name',100], 'phone'=>['Phone number','tel','tel',30], 'email'=>['Email','email','email',150]] as $field=>$settings)
+                    <label class="purchase-field {{ $field === 'email' ? 'purchase-field--wide' : '' }}">{{ $settings[0] }} @if($field === 'email')<span>Optional</span>@endif<input name="{{ $field }}" type="{{ $settings[1] }}" autocomplete="{{ $settings[2] }}" maxlength="{{ $settings[3] }}" value="{{ old($field, $customer[$field] ?? '') }}" @required($field !== 'email') aria-describedby="error-{{ $field }}" aria-invalid="{{ $errors->has($field) ? 'true' : 'false' }}"><small id="error-{{ $field }}">@error($field){{ $message }}@enderror</small></label>
+                @endforeach
             </div></section>
             <section class="purchase-card" aria-labelledby="address-title"><div class="purchase-section-heading"><h2 id="address-title">Delivery address</h2><span>02</span></div><div class="purchase-fields">
-                <label class="purchase-field purchase-field--wide">Street address<input name="address" autocomplete="street-address" required maxlength="250" placeholder="House, road, and apartment" aria-describedby="error-address"><small id="error-address" data-error="address"></small></label>
-                <label class="purchase-field">Area / neighbourhood<input name="area" autocomplete="address-level3" required maxlength="100" aria-describedby="error-area"><small id="error-area" data-error="area"></small></label>
-                <label class="purchase-field">City / district<input name="city" autocomplete="address-level2" required maxlength="100" aria-describedby="error-city"><small id="error-city" data-error="city"></small></label>
-                <label class="purchase-field purchase-field--wide">Delivery zone<select name="zone" required aria-describedby="error-zone"><option value="">Choose your delivery zone</option><option value="dhaka">Inside Dhaka — BDT 80</option><option value="outside">Outside Dhaka — BDT 150</option></select><small id="error-zone" data-error="zone"></small></label>
-                <label class="purchase-field purchase-field--wide">Delivery instructions <span>Optional</span><textarea name="notes" rows="3" maxlength="500" placeholder="A landmark or anything helpful for your delivery"></textarea></label>
+                @foreach(['address'=>['Street address','street-address',250], 'area'=>['Area / neighbourhood','address-level3',100], 'city'=>['City / district','address-level2',100]] as $field=>$settings)
+                    <label class="purchase-field {{ $field === 'address' ? 'purchase-field--wide' : '' }}">{{ $settings[0] }}<input name="{{ $field }}" autocomplete="{{ $settings[1] }}" required maxlength="{{ $settings[2] }}" value="{{ old($field, $customer[$field] ?? '') }}" aria-describedby="error-{{ $field }}" aria-invalid="{{ $errors->has($field) ? 'true' : 'false' }}"><small id="error-{{ $field }}">@error($field){{ $message }}@enderror</small></label>
+                @endforeach
+                <label class="purchase-field purchase-field--wide">Delivery zone<select name="zone" required aria-describedby="error-zone" aria-invalid="{{ $errors->has('zone') ? 'true' : 'false' }}"><option value="">Choose your delivery zone</option>@foreach($deliveryRates as $zone=>$amount)<option value="{{ $zone }}" @selected(old('zone', $customer['zone'] ?? '') === $zone)>{{ $zone === 'dhaka' ? 'Inside Dhaka' : 'Outside Dhaka' }} — BDT {{ number_format($amount / 100, 2) }}</option>@endforeach</select><small id="error-zone">@error('zone'){{ $message }}@enderror</small></label>
+                <label class="purchase-field purchase-field--wide">Delivery instructions <span>Optional</span><textarea name="notes" rows="3" maxlength="500" placeholder="A landmark or anything helpful for your delivery" aria-describedby="error-notes">{{ old('notes', $customer['notes'] ?? '') }}</textarea><small id="error-notes">@error('notes'){{ $message }}@enderror</small></label>
             </div></section>
-            <section class="purchase-card" aria-labelledby="payment-title"><div class="purchase-section-heading"><h2 id="payment-title">Payment</h2><span>03</span></div><label class="purchase-payment"><input type="radio" name="payment" value="cod" checked><span><strong>Cash on Delivery</strong><small>Pay when your order arrives.</small></span><span class="purchase-pill">COD</span></label></section>
-            <a class="purchase-text-link" href="{{ url('/cart') }}">&larr; Back to cart</a>
+            <section class="purchase-card" aria-labelledby="payment-title"><div class="purchase-section-heading"><h2 id="payment-title">Payment</h2><span>03</span></div><label class="purchase-payment"><input type="radio" name="payment" value="cod" required @checked(old('payment', $customer['payment'] ?? 'cod') === 'cod')><span><strong>Cash on Delivery</strong><small>Pay when your order arrives.</small></span><span class="purchase-pill">COD</span></label>@error('payment')<p class="purchase-feedback" data-error>{{ $message }}</p>@enderror</section>
+            <a class="purchase-text-link" href="{{ route('cart.index') }}">&larr; Back to cart</a>
         </form>
-        @include('checkout._summary', ['step' => 2])
+        @include('checkout._summary')
     </div>
-    <section class="purchase-empty purchase-card" data-empty hidden><h2>Your cart is empty.</h2><p>Add items before continuing to checkout.</p><a class="purchase-button" href="{{ url('/cart') }}">Back to cart</a></section>
 </div></div>
 @endsection
