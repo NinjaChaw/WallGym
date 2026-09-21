@@ -13,6 +13,7 @@ use Tests\TestCase;
 class ProductCrudTest extends TestCase
 {
     use RefreshDatabase;
+    use \Tests\AuthenticatesAdmin;
 
     public function createApplication()
     {

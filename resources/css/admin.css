@@ -80,3 +80,8 @@ body.wg-admin { margin: 0; min-width: 0; }
 @media (min-width: 768px) { .wg-admin-main { padding: 38px 32px 44px; } .wg-admin-topbar, .wg-admin-footer { padding-inline: 32px; } .wg-admin-welcome { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); } .wg-admin-welcome__art { display: flex; } .wg-admin-welcome__copy { padding: 36px; } .wg-admin-module-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 @media (min-width: 1200px) { .wg-sidebar { width: 256px; visibility: visible; transform: none; } .wg-sidebar__close, .wg-admin-menu-button { display: none; } .wg-admin-workspace { margin-left: 256px; } .wg-admin-main { padding: 44px 40px 48px; } .wg-admin-topbar, .wg-admin-footer { padding-inline: 40px; } }
 @media (prefers-reduced-motion: reduce) { .wg-sidebar { transition: none; } }
+.wg-login { width: min(460px, calc(100% - 32px)); margin: clamp(32px, 10vh, 100px) auto; }
+.wg-login > .wg-admin-brand { margin-bottom: 28px; }
+.wg-login h1 { font-size: 30px; letter-spacing: -.04em; margin: 12px 0; }
+.wg-login > .category-text-button { display: inline-block; margin-top: 20px; }
+.wg-login form > button { width: 100%; justify-content: center; }

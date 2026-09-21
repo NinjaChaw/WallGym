@@ -11,6 +11,7 @@ use Tests\TestCase;
 class AdminOrderTest extends TestCase
 {
     use RefreshDatabase;
+    use \Tests\AuthenticatesAdmin;
 
     public function createApplication()
     {

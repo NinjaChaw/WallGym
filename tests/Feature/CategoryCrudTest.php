@@ -14,6 +14,7 @@ use Tests\TestCase;
 class CategoryCrudTest extends TestCase
 {
     use RefreshDatabase;
+    use \Tests\AuthenticatesAdmin;
 
     public function createApplication()
     {
